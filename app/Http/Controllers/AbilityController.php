@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Ability;
 use App\Http\Resources\AbilityResource;
+use App\Http\Resources\RoleResource;
 use Illuminate\Http\Request;
 
 class AbilityController extends Controller
@@ -55,5 +56,13 @@ class AbilityController extends Controller
         $ability->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function roles($ability_id)
+    {
+        $ability = Ability::findOrFail($ability_id);
+        $roles = $ability->roles()->paginate();
+
+        return RoleResource::collection($roles);
     }
 }

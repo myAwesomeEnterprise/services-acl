@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Role extends Model
 {
@@ -29,4 +30,23 @@ class Role extends Model
         'id' => 'int',
         'level' => 'int',
     ];
+
+    /**
+     * The abilities relationship.
+     *
+     * @return MorphToMany
+     */
+    public function abilities()
+    {
+        return $this->morphToMany(
+            'App\Entities\Ability',
+            'entity',
+            'permissions'
+        )->withPivot('forbidden', 'scope');
+    }
+
+    public function allow($ability = null, $model = null)
+    {
+
+    }
 }

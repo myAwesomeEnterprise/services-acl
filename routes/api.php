@@ -10,6 +10,8 @@ $router->group([
     $router->put('/{ability}', 'AbilityController@update');
     $router->delete('/{ability}', 'AbilityController@destroy');
 
+    $router->get('{ability}/roles', 'AbilityController@roles');
+
 });
 
 $router->group([
@@ -20,4 +22,6 @@ $router->group([
     $router->get('/{role}', 'RoleController@get');
     $router->put('/{role}', 'RoleController@update');
     $router->delete('/{role}', 'RoleController@destroy');
+
+    $router->get('/{role}/abilities', 'RoleController@abiities');
 });
