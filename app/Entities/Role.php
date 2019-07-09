@@ -45,8 +45,12 @@ class Role extends Model
         )->withPivot('forbidden', 'scope');
     }
 
-    public function allow($ability = null, $model = null)
+    public function authorizables()
     {
-
+        return $this->morphToMany(
+            'App\Entities\Authorizable',
+            'entity',
+            'assigned_roles'
+        )->withPivot('scope');
     }
 }
